@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <ESPAsyncWebServer.h>
 #include <webserver.h>
+#include <api.h>
+
 
 AsyncWebServer server(80);
 
@@ -16,10 +18,13 @@ void setupServer()
 
   // API END POINT
   server.on("/scan", HTTP_GET, handleScanRequest);
+  server.on("/api/sensor", HTTP_GET, handleSensorData);
+  server.on("/api/sensor", HTTP_POST, handlePostSensor);
 
+  //Config
 
+  DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
 
-  // 
   server.begin();
 }
 
@@ -35,7 +40,7 @@ void handleNotFoundRequest(AsyncWebServerRequest *request)
 
   if (!existFile(filename) || protectFiles(filename))
   {
-    
+
     request->send(404, "text/plain", "FileNotFound");
     return;
   }
@@ -187,4 +192,3 @@ bool ReactRouterLink(const String &link)
   }
   return false;
 }
-

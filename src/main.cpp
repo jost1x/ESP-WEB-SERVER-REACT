@@ -9,6 +9,8 @@
 #include <Communication.h>
 #include <webserver.h>
 #include <ESPAsyncWebServer.h>
+#include <sensor.h>
+
 
 FS *filesystem = &SPIFFS;
 
@@ -16,13 +18,12 @@ void setup()
 {
     Serial.begin(115200);
     communitacion_connect();
-
     if (!SPIFFS.begin())
     {
         Serial.println("[SPIFFS] Error montando la memoria.");
         return;
     }
-
+    setupSensor();
     setupServer();
 }
 

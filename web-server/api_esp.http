@@ -1,0 +1,6 @@
+GET http://192.168.3.116/api/sensor
+
+###
+
+POST  http://192.168.3.116/api/sensor
+    ?GPIO2=toggle
