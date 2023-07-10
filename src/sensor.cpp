@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <sensor.h>
 
+#ifdef ESP32
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -9,6 +10,10 @@ uint8_t temprature_sens_read();
 }
 #endif
 uint8_t temprature_sens_read();
+#endif
+
+
+
 
 
 void setupSensor() {
@@ -30,3 +35,9 @@ void toggleState(int pin) {
 uint8_t internalTempSensor() {
     return (temprature_sens_read() - 32) / 1.8;
 }
+
+#ifdef ESP8266
+    int temprature_sens_read(){
+        return 32;
+    }
+#endif

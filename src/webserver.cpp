@@ -4,6 +4,8 @@
 #include <api.h>
 
 
+
+
 AsyncWebServer server(80);
 
 String links[] = {
@@ -58,7 +60,7 @@ void handleNotFoundRequest(AsyncWebServerRequest *request)
     filename += ".gz";
   }
 
-  AsyncWebServerResponse *response = request->beginResponse(SPIFFS, filename, contentType);
+  AsyncWebServerResponse *response = request->beginResponse(FS_S, filename, contentType);
   if (filename.endsWith(".gz"))
   {
     response->addHeader("content-encoding", "gzip");
