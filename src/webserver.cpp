@@ -3,14 +3,9 @@
 #include <webserver.h>
 #include <api.h>
 
-
-
-
 AsyncWebServer server(80);
 
-String links[] = {
-    "/",
-    "/settings"};
+String links[] = {"/"};
 
 int numLinks = sizeof(links) / sizeof(links[0]);
 
@@ -23,7 +18,7 @@ void setupServer()
   server.on("/api/sensor", HTTP_GET, handleSensorData);
   server.on("/api/sensor", HTTP_POST, handlePostSensor);
 
-  //Config
+  // Config
 
   DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
 

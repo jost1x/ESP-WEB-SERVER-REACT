@@ -5,7 +5,9 @@ export default function Index() {
 
   const [data, setData] = useState(0);
 
+  const hostEsp = import.meta.env.VITE_HOST_ESP
 
+  console.log(hostEsp);
 
   useEffect(() => {
     fetchData()
@@ -22,7 +24,7 @@ export default function Index() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_HOST_ESP}/sensor`);
+      const response = await axios.get(`${hostEsp}/sensor`);
       setData(response.data);
       console.log(response.data)
     } catch (error) {
@@ -32,7 +34,7 @@ export default function Index() {
 
 
   const buttonClick = async () => {
-    await axios.post(`${import.meta.env.VITE_HOST_ESP}/sensor`, null, {
+    await axios.post(`${hostEsp}/sensor`, null, {
       params: {
         "GPIO2": "toggle"
       }
